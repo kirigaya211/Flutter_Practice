@@ -27,5 +27,32 @@ void main() {
         expect(result, tNumberTriviaModel);
       },
     );
+
+    test(
+      'should return a valid model when the JSON number is regarded as a double',
+      () async {
+        //arange
+        final Map<String, dynamic> jsonMap = json.decode(
+          fixture('trivia_double.json'),
+        );
+        //act
+        final result = NumberTriviaModel.fromJson(jsonMap);
+        //assert
+        expect(result, tNumberTriviaModel);
+      },
+    );
+  });
+
+  group('toJson', () {
+    test('should return a JSON map containing the proper data', () async {
+      //act
+      final result = tNumberTriviaModel.toJson();
+      //assert
+      final expectedMap = {
+        "text": "1e+40 is the Eddington-Dirac numebr.",
+        "number": 1,
+      };
+      expect(result, expectedMap);
+    });
   });
 }
